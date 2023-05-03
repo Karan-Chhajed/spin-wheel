@@ -178,7 +178,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
     const [showPrize, setShowPrize] = useState(false)
 
 	return (
-        <div className='absolute top-1/2 left-24'>
+        <div className='absolute top-1/4 left-[40%]'>
 		<motion.div
         animate={rotatorControl}
 			id='wheel'

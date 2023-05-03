@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { motion, useAnimation } from "framer-motion";
 import "./App.css";
 import { Wheel } from "./Wheel";
 
@@ -47,11 +46,13 @@ function App() {
 		'images/fcd3xv.png'
   ];
 
-  const rotatorControl = useAnimation()
+
 
   return (
-   
-      <motion.div animate={rotatorControl}>
+    <>
+    
+      <div  className="w-full h-full">
+      
       <Wheel
         mutation={() => {}}
         segments={segments}
@@ -61,8 +62,8 @@ function App() {
         canvasSize={333}
         rotationAngle={3600 + 22}
       />
-      </motion.div>
-
+      </div>
+      </>
   );
 }
 
