@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { RoundedButton } from './utils/Buttons';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { ShowPrize } from './ShowPrize';
+import { spriteMap, useActivitiesBGMSound, useSoundEffect } from './hooks/useSoundEffects';
+import { Sounds } from './utils/enum';
 
 
 interface WheelRenderProperties {
@@ -177,6 +179,28 @@ export const Wheel: FC<WheelRenderProperties> = ({
     const rotatorControl = useAnimation()
     const [showPrize, setShowPrize] = useState(false)
 
+	useActivitiesBGMSound();
+
+	const { play: playSpinWheelSound } = useSoundEffect(
+		'./sounds/audiosprite.mp3',
+		{
+			sprite: spriteMap,
+			id: Sounds.wheelSpinning
+		}
+	);
+	const { play: playSelectUISound } = useSoundEffect(
+		'./sounds/audiosprite.mp3',
+		{
+			sprite: spriteMap,
+			id: Sounds.selectUI
+		}
+	);
+	const { play: playClappingSound } =
+		useSoundEffect('./sounds/audiosprite.mp3', {
+			sprite: spriteMap,
+			id: Sounds.clapping
+		});
+
 	return (
         <div className='absolute top-1/4 left-[40%]'>
 		<motion.div
@@ -197,6 +221,8 @@ export const Wheel: FC<WheelRenderProperties> = ({
         <div className=' z-10 relative -mt-52 active:scale-90'>
         <RoundedButton color='bg-transparent'  onClick={async () => {
         mutation
+		playSelectUISound();
+		playSpinWheelSound();
           await rotatorControl.start({
             rotate: [0, rotationAngle],
             transition: {
@@ -209,6 +235,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
             setTimeout(() => {
                 setShowPrize(false)
             }, 3000)
+			playClappingSound();
             await rotatorControl.start({
                 rotate: [rotationAngle, 0],
                 transition: {
@@ -218,6 +245,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
                 }
               })
           }}>
+
            
 		<div className=' flex flex-col items-center w-20 overflow-visible align-middle'>
 			<img src='/images/spinner_icon.svg'/>
