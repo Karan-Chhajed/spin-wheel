@@ -50,7 +50,7 @@ function App() {
   const rotatorControl = useAnimation()
 
   return (
-    <div className="text-2xl font-bold">
+   
       <motion.div animate={rotatorControl}>
       <Wheel
         mutation={() => {}}
@@ -62,7 +62,7 @@ function App() {
         rotationAngle={3600 + 22}
       />
       </motion.div>
-    </div>
+
   );
 }
 

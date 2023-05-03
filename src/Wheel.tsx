@@ -178,13 +178,13 @@ export const Wheel: FC<WheelRenderProperties> = ({
     const [showPrize, setShowPrize] = useState(false)
 
 	return (
-        <div className=''>
+        <div className='absolute top-5 left-1/2'>
 		<motion.div
         animate={rotatorControl}
 			id='wheel'
 			className={`${
 				canvasSize >= 333 ? 'h-80 w-80' : 'h-72 w-72' // This is basically responsible for the outline of the wheel, hence this changes according to canvas and wheel size
-			} rounded-full border-8  border-black border-opacity-40 `}
+			} rounded-full border-8  border-black border-opacity-40  `}
 		>
 			<canvas
 				id='canvas'
@@ -194,7 +194,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
 			/>
 
 		</motion.div>
-        <div className=' z-10 absolute'>
+        <div className=' z-10 relative -mt-52'>
         <RoundedButton color='bg-transparent'  onClick={async () => {
         mutation
           await rotatorControl.start({
@@ -209,16 +209,26 @@ export const Wheel: FC<WheelRenderProperties> = ({
             setTimeout(() => {
                 setShowPrize(false)
             }, 3000)
+            await rotatorControl.start({
+                rotate: [rotationAngle, 0],
+                transition: {
+                  type: 'tween',
+                  duration: 2,
+                  ease: [0.5, 0.1, 0.15, 1]
+                }
+              })
           }}>
-            <div className='-mt-1 flex flex-col items-center align-middle'>
-		<div className='top-0 bottom-0 flex flex-col items-center overflow-visible align-middle'>
+           
+		<div className=' flex flex-col items-center w-20 overflow-visible align-middle'>
 			<img src='/images/spinner_icon.svg'/>
 		</div>
-	</div>
+
         </RoundedButton>
+        
+        </div>
         <AnimatePresence>
 					{showPrize ? (
-						<motion.div className='absolute z-30'>
+						<motion.div className='relative -top-48 -mt-2 ml-4 z-30'>
 							<ShowPrize
 								prize={1}
 								prizeType='powerplayCards'
@@ -226,7 +236,6 @@ export const Wheel: FC<WheelRenderProperties> = ({
 						</motion.div>
 					) : null}
 				</AnimatePresence>
-        </div>
         </div>
 	);
 };
