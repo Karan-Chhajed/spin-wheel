@@ -19,7 +19,7 @@ export const RoundedButton: FC<RoundedButtonProperties> = ({
 		type='button'
 		disabled={disabled}
 		onClick={onClick}
-		className={`rounded-full ${color} p-1.5 disabled:opacity-75 ${
+		className={`rounded-full ${color} p-1.5 disabled:opacity-75 outline-none focus:outline-none hover:outline-none active:outline-none border-none ${
 			className ?? ''
 		}`}
 	>

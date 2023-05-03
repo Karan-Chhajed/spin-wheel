@@ -178,7 +178,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
     const [showPrize, setShowPrize] = useState(false)
 
 	return (
-        <div className='absolute top-5 left-1/2'>
+        <div className='absolute top-1/2 left-24'>
 		<motion.div
         animate={rotatorControl}
 			id='wheel'
@@ -194,7 +194,7 @@ export const Wheel: FC<WheelRenderProperties> = ({
 			/>
 
 		</motion.div>
-        <div className=' z-10 relative -mt-52'>
+        <div className=' z-10 relative -mt-52 active:scale-90'>
         <RoundedButton color='bg-transparent'  onClick={async () => {
         mutation
           await rotatorControl.start({
